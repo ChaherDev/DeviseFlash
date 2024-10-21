@@ -15,6 +15,7 @@ class HomeViewViewModel {
     let currencySource = ["Dollar américain (USD)", "Euro (EUR)", "Yen japonais (JPY)", "Livre sterling (GBP)", "Franc suisse (CHF)"]
     let currencyFormatter: NumberFormatter
     var montant: Decimal = 0
+    var value: Double = 0
     var selectedCurrency = "Dollar américain (USD)" {
         didSet {
             updateCurrencyFormatter()

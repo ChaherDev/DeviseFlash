@@ -10,22 +10,28 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var viewModel = HomeViewViewModel()
-    @State private var value: Decimal = 0
+    @FocusState private var amountIsFocused: Bool
     
     var body: some View {
-        Form {
-            Picker("Devise Source", selection: $viewModel.selectedCurrency) {
-                ForEach(viewModel.currencySource, id: \.self) { devise in
-                    Text(devise)
+        NavigationStack {
+            Form {
+                Picker("Devise Source", selection: $viewModel.selectedCurrency) {
+                    ForEach(viewModel.currencySource, id: \.self) { devise in
+                        Text(devise)
+                    }
+                }
+                TextField("Entre un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
+                    .keyboardType(.decimalPad)
+                    .focused($amountIsFocused)
+            }
+            .navigationTitle("DeviseFlash")
+            .toolbar {
+                if amountIsFocused {
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
                 }
             }
-            .onChange(of: viewModel.selectedCurrency) { oldValue, newValue in
-                viewModel.selectedCurrency = newValue
-            }
-            
-            
-            TextField("Entre un montant", value: $value, formatter: viewModel.currencyFormatter)
-                .keyboardType(.numberPad)
         }
     }
 }
