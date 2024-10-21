@@ -13,14 +13,16 @@ import SwiftUI
 @Observable
 class HomeViewViewModel {
     let currencySource = ["Dollar américain (USD)", "Euro (EUR)", "Yen japonais (JPY)", "Livre sterling (GBP)", "Franc suisse (CHF)"]
+    let currencyTarget = ["Dollar américain (USD)", "Euro (EUR)", "Yen japonais (JPY)", "Livre sterling (GBP)", "Franc suisse (CHF)"]
     let currencyFormatter: NumberFormatter
     var montant: Decimal = 0
     var value: Double = 0
-    var selectedCurrency = "Dollar américain (USD)" {
+    var selectedCurrencySource = "Dollar américain (USD)" {
         didSet {
             updateCurrencyFormatter()
         }
     }
+    var selectedCurrencyTarget = "Dollar américain (USD)"
     
     init() {
         currencyFormatter = NumberFormatter()
@@ -29,7 +31,7 @@ class HomeViewViewModel {
     
     func updateCurrencyFormatter() {
         currencyFormatter.numberStyle = .currency
-        switch selectedCurrency {
+        switch selectedCurrencySource {
         case "Dollar américain (USD)":
             currencyFormatter.locale = Locale(identifier: "en_US_POSIX")
         case "Euro (EUR)":

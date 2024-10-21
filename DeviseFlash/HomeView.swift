@@ -15,14 +15,23 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Picker("Devise Source", selection: $viewModel.selectedCurrency) {
-                    ForEach(viewModel.currencySource, id: \.self) { devise in
-                        Text(devise)
+                Section {
+                    Picker("Devise Source", selection: $viewModel.selectedCurrencySource) {
+                        ForEach(viewModel.currencySource, id: \.self) { devise in
+                            Text(devise)
+                        }
+                    }
+                    TextField("Entre un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
+                        .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
+                }
+                Section {
+                    Picker("Devise Cible", selection: $viewModel.selectedCurrencyTarget) {
+                        ForEach(viewModel.currencyTarget, id: \.self) { devise in
+                            Text(devise)
+                        }
                     }
                 }
-                TextField("Entre un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
-                    .keyboardType(.decimalPad)
-                    .focused($amountIsFocused)
             }
             .navigationTitle("DeviseFlash")
             .toolbar {
