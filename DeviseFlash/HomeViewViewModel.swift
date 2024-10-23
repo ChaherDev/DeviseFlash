@@ -26,17 +26,17 @@ struct CurrencyConversionResponse: Codable {
 
 @Observable
 class HomeViewViewModel {
-    let currencySource = ["Dollar américain (USD)", "Euro (EUR)", "Yen japonais (JPY)", "Livre sterling (GBP)", "Franc suisse (CHF)"]
-    let currencyTarget = ["Dollar américain (USD)", "Euro (EUR)", "Yen japonais (JPY)", "Livre sterling (GBP)", "Franc suisse (CHF)"]
+    let currencySource = ["USD", "EUR", "JPY", "GBP", "CHF"]
+    let currencyTarget = ["USD", "EUR", "JPY", "GBP", "CHF"]
     let currencyFormatter: NumberFormatter
-    var montant: Decimal = 0
+    var montant: Double = 0
     var value: Double = 0
-    var selectedCurrencySource = "Dollar américain (USD)" {
+    var selectedCurrencySource = "USD" {
         didSet {
             updateCurrencyFormatter()
         }
     }
-    var selectedCurrencyTarget = "Dollar américain (USD)"
+    var selectedCurrencyTarget = "USD"
     var conversionResponse: CurrencyConversionResponse?
     var errorMessage: String?
     
@@ -48,15 +48,15 @@ class HomeViewViewModel {
     func updateCurrencyFormatter() {
         currencyFormatter.numberStyle = .currency
         switch selectedCurrencySource {
-        case "Dollar américain (USD)":
+        case "USD":
             currencyFormatter.locale = Locale(identifier: "en_US_POSIX")
-        case "Euro (EUR)":
+        case "EUR":
             currencyFormatter.locale = Locale(identifier: "fr_FR_POSIX")
-        case "Yen japonais (JPY)":
+        case "JPY":
             currencyFormatter.locale = Locale(identifier: "ja_JP_POSIX")
-        case "Livre sterling (GBP)":
+        case "GBP":
             currencyFormatter.locale = Locale(identifier: "en_GB_POSIX")
-        case "Franc suisse (CHF)":
+        case "CHF":
             currencyFormatter.locale = Locale(identifier: "fr_CH_POSIX")
         default :
             currencyFormatter.locale = Locale.current
@@ -64,27 +64,30 @@ class HomeViewViewModel {
     }
     
     var formattedMontant: String {
-        return currencyFormatter.string(from: montant as NSDecimalNumber) ?? ""
+        return currencyFormatter.string(from: (montant as? NSDecimalNumber)!) ?? ""
     }
     
     func fetchData() async {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
             errorMessage = "Clé API manquante."
+            print(errorMessage ?? "La clé API est présente")
             return
         }
         
         let urlString = "https://api.currencylayer.com/convert?access_key=\(apiKey)&from=USD&to=EUR&amount=25&format=1"
         guard let url = URL(string: urlString) else {
             errorMessage = "URL invalide."
+            print(errorMessage ?? "L'URL est valide")
             return
         }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             conversionResponse = try JSONDecoder().decode(CurrencyConversionResponse.self, from: data)
-            montant = Decimal(conversionResponse?.result ?? 5)
+            montant = Double(conversionResponse?.result ?? 5)
         } catch {
             errorMessage = "Erreur lors de la récupération des données."
+            print(errorMessage ?? "Pas d'erreurs lors de la récupération des données")
         }
     }
     
