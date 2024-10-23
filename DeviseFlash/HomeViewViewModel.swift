@@ -7,8 +7,22 @@
 
 // Mon formatteur de devises
 
+import Foundation
 import Observation
-import SwiftUI
+
+struct CurrencyConversionResponse: Codable {
+    let success: Bool
+    let terms: URL
+    let privacy: URL
+    let query: Query
+    let result: Double
+    
+    struct Query: Codable {
+        let from: String
+        let to: String
+        let amount: Double
+    }
+}
 
 @Observable
 class HomeViewViewModel {
@@ -23,6 +37,8 @@ class HomeViewViewModel {
         }
     }
     var selectedCurrencyTarget = "Dollar américain (USD)"
+    var conversionResponse: CurrencyConversionResponse?
+    var errorMessage: String?
     
     init() {
         currencyFormatter = NumberFormatter()
@@ -50,4 +66,38 @@ class HomeViewViewModel {
     var formattedMontant: String {
         return currencyFormatter.string(from: montant as NSDecimalNumber) ?? ""
     }
+    
+    func fetchData() async {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
+            errorMessage = "Clé API manquante."
+            return
+        }
+        
+        let urlString = "https://api.currencylayer.com/convert?access_key=\(apiKey)&from=USD&to=EUR&amount=25&format=1"
+        guard let url = URL(string: urlString) else {
+            errorMessage = "URL invalide."
+            return
+        }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            conversionResponse = try JSONDecoder().decode(CurrencyConversionResponse.self, from: data)
+            montant = Decimal(conversionResponse?.result ?? 5)
+        } catch {
+            errorMessage = "Erreur lors de la récupération des données."
+        }
+    }
+    
 }
+
+
+
+//
+//Task {
+//    do {
+//        try await fetchData()
+//    } catch {
+//        print("Erreur lors de la récupération des données : \(error)")
+//    }
+//}
+//

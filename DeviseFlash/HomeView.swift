@@ -31,6 +31,7 @@ struct HomeView: View {
                             Text(devise)
                         }
                     }
+                    Text("\(viewModel.montant)")
                 }
             }
             .navigationTitle("DeviseFlash")
@@ -38,6 +39,9 @@ struct HomeView: View {
                 if amountIsFocused {
                     Button("Done") {
                         amountIsFocused = false
+                        Task {
+                            await viewModel.fetchData()
+                        }
                     }
                 }
             }
