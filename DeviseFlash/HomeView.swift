@@ -31,16 +31,15 @@ struct HomeView: View {
                             Text(devise)
                         }
                     }
-                    Text("\(viewModel.montant)")
+                    Text("\(viewModel.montant, specifier: "%.2f")")
+                        .font(.largeTitle)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
             .navigationTitle("DeviseFlash")
             .toolbar {
                 if amountIsFocused {
                     Button("Done") {
-                        viewModel.selectedCurrencySource = viewModel.conversionResponse?.query.from ?? ""
-                        viewModel.selectedCurrencyTarget = viewModel.conversionResponse?.query.to ?? ""
-                        viewModel.value = viewModel.conversionResponse?.query.amount ?? 0
                         amountIsFocused = false
                         Task {
                             await viewModel.fetchData()

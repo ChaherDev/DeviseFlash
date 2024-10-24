@@ -36,7 +36,11 @@ class HomeViewViewModel {
             updateCurrencyFormatter()
         }
     }
-    var selectedCurrencyTarget = "USD"
+    var selectedCurrencyTarget = "EUR" {
+        didSet {
+            updateCurrencyFormatter()
+        }
+    }
     var conversionResponse: CurrencyConversionResponse?
     var errorMessage: String?
     
@@ -63,10 +67,6 @@ class HomeViewViewModel {
         }
     }
     
-    var formattedMontant: String {
-        return currencyFormatter.string(from: (montant as? NSDecimalNumber)!) ?? ""
-    }
-    
     func fetchData() async {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
             errorMessage = "Clé API manquante."
@@ -74,7 +74,7 @@ class HomeViewViewModel {
             return
         }
         
-        let urlString = "https://api.currencylayer.com/convert?access_key=\(apiKey)&from=USD&to=EUR&amount=25&format=1"
+        let urlString = "https://api.currencylayer.com/convert?access_key=\(apiKey)&from=\(selectedCurrencySource)&to=\(selectedCurrencyTarget)&amount=\(value)&format=1"
         guard let url = URL(string: urlString) else {
             errorMessage = "URL invalide."
             print(errorMessage ?? "L'URL est valide")
@@ -84,7 +84,7 @@ class HomeViewViewModel {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             conversionResponse = try JSONDecoder().decode(CurrencyConversionResponse.self, from: data)
-            montant = Double(conversionResponse?.result ?? 5)
+            montant = conversionResponse?.result ?? 5
         } catch {
             errorMessage = "Erreur lors de la récupération des données."
             print(errorMessage ?? "Pas d'erreurs lors de la récupération des données")
