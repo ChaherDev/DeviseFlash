@@ -7,43 +7,98 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct HomeView: View {
     
     @State private var viewModel = HomeViewViewModel()
     @FocusState private var amountIsFocused: Bool
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section {
+        ZStack {
+            // Fond en dégradé
+            LinearGradient(
+                gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue.opacity(0.9)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            
+            VStack(spacing: 20) {
+                Text("DeviseFlash")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(.top, 40)
+                
+                VStack(spacing: 15) {
+                    Text("Choisissez votre devise source")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
                     Picker("Devise Source", selection: $viewModel.selectedCurrencySource) {
                         ForEach(viewModel.currencySource, id: \.self) { devise in
                             Text(devise)
                         }
                     }
-                    TextField("Entre un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
+                    .pickerStyle(.menu)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.white.opacity(0.2))
+                    .cornerRadius(12)
+                    
+                    TextField("Entrez un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
+                        .padding()
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(12)
                 }
-                Section {
+                .padding(.horizontal, 20)
+                
+                VStack(spacing: 15) {
+                    Text("Choisissez votre devise cible")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
                     Picker("Devise Cible", selection: $viewModel.selectedCurrencyTarget) {
                         ForEach(viewModel.currencyTarget, id: \.self) { devise in
                             Text(devise)
                         }
                     }
+                    .pickerStyle(.menu)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.white.opacity(0.2))
+                    .cornerRadius(12)
+                    .padding()
+                    
                     Text("\(viewModel.montant, specifier: "%.2f")")
-                        .font(.largeTitle)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue.opacity(0.7))
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                        .animation(.easeInOut, value: viewModel.montant)
                 }
+                
+                Spacer()
             }
-            .navigationTitle("DeviseFlash")
             .toolbar {
                 if amountIsFocused {
-                    Button("Done") {
-                        amountIsFocused = false
-                        Task {
-                            await viewModel.fetchData()
+                    ToolbarItem(placement: .keyboard) {
+                        Button("Terminé") {
+                            amountIsFocused = false
+                            Task {
+                                await viewModel.fetchData()
+                            }
                         }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue.opacity(0.8))
+                        .cornerRadius(8)
                     }
                 }
             }
@@ -54,4 +109,3 @@ struct HomeView: View {
 #Preview {
     HomeView()
 }
-
