@@ -17,23 +17,11 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue.opacity(0.9)]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            Color.blue.opacity(0.8)
             .ignoresSafeArea()
-            
             
             VStack(spacing: 20) {
                 Spacer()
-                Text("DeviseFlash\n⚡️\nVoyage au Cœur\ndes Devises !")
-                    .font(.system(size: 38, weight: .bold, design: .rounded))
-                    .foregroundStyle(color)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 40)
-                    .padding(.bottom, 20)
-                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
                 
                 Spacer()
                 VStack(spacing: 10) {
@@ -61,13 +49,20 @@ struct HomeView: View {
                         .cornerRadius(12)
                         .multilineTextAlignment(.center)
                 }
-                Spacer()
+                
+                Text("DeviseFlash\n⚡️\nVoyage au Cœur\ndes Devises !")
+                    .font(.system(size: 35, weight: .bold, design: .rounded))
+                    .foregroundStyle(color)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+                    .padding(.bottom, 20)
+                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
+                
                 VStack(spacing: 10) {
                     Text("Choisissez votre devise cible")
                         .font(.headline)
                         .foregroundStyle(color)
                         .fontWeight(.bold)
-
                     
                     Picker("Devise Cible", selection: $viewModel.selectedCurrencyTarget) {
                         ForEach(viewModel.currencyTarget, id: \.self) { devise in
@@ -89,6 +84,7 @@ struct HomeView: View {
                         .cornerRadius(12)
                         .animation(.easeInOut, value: viewModel.montant)
                 }
+                
                 Spacer()
                 Spacer()
             }

@@ -5,8 +5,6 @@
 //  Created by Chaher Machhour on 20/10/2024.
 //
 
-// Mon formatteur de devises
-
 import Foundation
 import Observation
 
@@ -26,8 +24,10 @@ struct CurrencyConversionResponse: Codable {
 
 @Observable
 class HomeViewViewModel {
-    let currencySource = ["USD", "EUR", "JPY", "GBP", "CHF"]
-    let currencyTarget = ["USD", "EUR", "JPY", "GBP", "CHF"]
+    // Ajout des autres devises
+    let currencySource = ["USD", "EUR", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD", "CNY", "SEK", "NOK", "MXN", "SGD"]
+    let currencyTarget = ["USD", "EUR", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD", "CNY", "SEK", "NOK", "MXN", "SGD"]
+    
     let currencyFormatter: NumberFormatter
     var montant: Double = 0
     var value: Double = 0
@@ -36,6 +36,7 @@ class HomeViewViewModel {
             updateCurrencyFormatter()
         }
     }
+    
     var targetCurrencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -47,18 +48,15 @@ class HomeViewViewModel {
             updateTargetCurrencyFormatter()
         }
     }
-  
+    
     var conversionResponse: CurrencyConversionResponse?
     var errorMessage: String?
-    
     
     init() {
         currencyFormatter = NumberFormatter()
         updateCurrencyFormatter()
     }
     
-  
-
     func updateTargetCurrencyFormatter() {
         targetCurrencyFormatter.currencyCode = selectedCurrencyTarget
         switch selectedCurrencyTarget {
@@ -72,12 +70,27 @@ class HomeViewViewModel {
             targetCurrencyFormatter.locale = Locale(identifier: "en_GB_POSIX")
         case "CHF":
             targetCurrencyFormatter.locale = Locale(identifier: "fr_CH_POSIX")
+        case "AUD":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_AU_POSIX")
+        case "CAD":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_CA_POSIX")
+        case "NZD":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_NZ_POSIX")
+        case "CNY":
+            targetCurrencyFormatter.locale = Locale(identifier: "zh_CN")
+        case "SEK":
+            targetCurrencyFormatter.locale = Locale(identifier: "sv_SE")
+        case "NOK":
+            targetCurrencyFormatter.locale = Locale(identifier: "no_NO")
+        case "MXN":
+            targetCurrencyFormatter.locale = Locale(identifier: "es_MX")
+        case "SGD":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_SG")
         default:
             targetCurrencyFormatter.locale = Locale.current
         }
     }
 
-    
     func updateCurrencyFormatter() {
         currencyFormatter.numberStyle = .currency
         switch selectedCurrencySource {
@@ -91,14 +104,30 @@ class HomeViewViewModel {
             currencyFormatter.locale = Locale(identifier: "en_GB_POSIX")
         case "CHF":
             currencyFormatter.locale = Locale(identifier: "fr_CH_POSIX")
-        default :
+        case "AUD":
+            currencyFormatter.locale = Locale(identifier: "en_AU_POSIX")
+        case "CAD":
+            currencyFormatter.locale = Locale(identifier: "en_CA_POSIX")
+        case "NZD":
+            currencyFormatter.locale = Locale(identifier: "en_NZ_POSIX")
+        case "CNY":
+            currencyFormatter.locale = Locale(identifier: "zh_CN")
+        case "SEK":
+            currencyFormatter.locale = Locale(identifier: "sv_SE")
+        case "NOK":
+            currencyFormatter.locale = Locale(identifier: "no_NO")
+        case "MXN":
+            currencyFormatter.locale = Locale(identifier: "es_MX")
+        case "SGD":
+            currencyFormatter.locale = Locale(identifier: "en_SG")
+        default:
             currencyFormatter.locale = Locale.current
         }
     }
     
     func fetchData() async {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
-        fatalError("Clé API manquante.")
+            fatalError("Clé API manquante.")
         }
         
         let urlString = "https://api.currencylayer.com/convert?access_key=\(apiKey)&from=\(selectedCurrencySource)&to=\(selectedCurrencyTarget)&amount=\(value)&format=1"
@@ -139,14 +168,12 @@ class HomeViewViewModel {
             print(errorMessage ?? "Erreur de décodage")
             
             // Affichage des données brutes pour le décodage
-            
             let dataString = await String(data: (try? URLSession.shared.data(from: url).0) ?? Data(), encoding: .utf8)
-            print("Données brutes: \(dataString ?? "Acune donnée brute")")
+            print("Données brutes: \(dataString ?? "Aucune donnée brute")")
             
         } catch {
             errorMessage = "Erreur lors de la récupération des données."
             print(errorMessage ?? "Pas d'erreurs lors de la récupération des données")
         }
     }
-    
 }
