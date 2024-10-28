@@ -23,7 +23,21 @@ struct HomeView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 20) {  
+            
+            VStack(spacing: 20) {
+                Text("DeviseFlash\n⚡️\nVoyage au Cœur\ndes Devises !")
+                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                        .foregroundStyle(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.orange, Color.pink]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 40)
+                        .padding(.bottom, 20)
+                        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
                 VStack(spacing: 10) {
                     Text("Choisissez votre devise source")
                         .font(.headline)
