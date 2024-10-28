@@ -34,6 +34,9 @@ class HomeViewViewModel {
     var selectedCurrencySource = "USD" {
         didSet {
             updateCurrencyFormatter()
+            Task {
+                await fetchData()
+            }
         }
     }
     
@@ -46,6 +49,9 @@ class HomeViewViewModel {
     var selectedCurrencyTarget = "EUR" {
         didSet {
             updateTargetCurrencyFormatter()
+            Task {
+                await fetchData()
+            }
         }
     }
     

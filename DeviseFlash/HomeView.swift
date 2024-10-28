@@ -48,6 +48,11 @@ struct HomeView: View {
                         .background(Color.white)
                         .cornerRadius(12)
                         .multilineTextAlignment(.center)
+                        .onSubmit {
+                            Task {
+                                await viewModel.fetchData()
+                            }
+                        }
                 }
                 
                 Text("DeviseFlash\n⚡️\nVoyage au Cœur\ndes Devises !")
@@ -93,7 +98,7 @@ struct HomeView: View {
             .toolbar {
                 if amountIsFocused {
                     ToolbarItem(placement: .keyboard) {
-                        Button("Terminé") {
+                        Button("Valider") {
                             amountIsFocused = false
                             Task {
                                 await viewModel.fetchData()
