@@ -36,18 +36,47 @@ class HomeViewViewModel {
             updateCurrencyFormatter()
         }
     }
+    var targetCurrencyFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter
+    }()
+    
     var selectedCurrencyTarget = "EUR" {
         didSet {
-            updateCurrencyFormatter()
+            updateTargetCurrencyFormatter()
         }
     }
+  
     var conversionResponse: CurrencyConversionResponse?
     var errorMessage: String?
+    
     
     init() {
         currencyFormatter = NumberFormatter()
         updateCurrencyFormatter()
     }
+    
+  
+
+    func updateTargetCurrencyFormatter() {
+        targetCurrencyFormatter.currencyCode = selectedCurrencyTarget
+        switch selectedCurrencyTarget {
+        case "USD":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_US_POSIX")
+        case "EUR":
+            targetCurrencyFormatter.locale = Locale(identifier: "fr_FR_POSIX")
+        case "JPY":
+            targetCurrencyFormatter.locale = Locale(identifier: "ja_JP_POSIX")
+        case "GBP":
+            targetCurrencyFormatter.locale = Locale(identifier: "en_GB_POSIX")
+        case "CHF":
+            targetCurrencyFormatter.locale = Locale(identifier: "fr_CH_POSIX")
+        default:
+            targetCurrencyFormatter.locale = Locale.current
+        }
+    }
+
     
     func updateCurrencyFormatter() {
         currencyFormatter.numberStyle = .currency

@@ -16,7 +16,6 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            // Fond en dégradé
             LinearGradient(
                 gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.blue.opacity(0.9)]),
                 startPoint: .topLeading,
@@ -24,14 +23,8 @@ struct HomeView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 20) {
-                Text("DeviseFlash")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.top, 40)
-                
-                VStack(spacing: 15) {
+            VStack(spacing: 20) {  
+                VStack(spacing: 10) {
                     Text("Choisissez votre devise source")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -54,9 +47,8 @@ struct HomeView: View {
                         .background(Color.white.opacity(0.8))
                         .cornerRadius(12)
                 }
-                .padding(.horizontal, 20)
                 
-                VStack(spacing: 15) {
+                VStack(spacing: 10) {
                     Text("Choisissez votre devise cible")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -71,21 +63,19 @@ struct HomeView: View {
                     .padding()
                     .background(Color.white.opacity(0.2))
                     .cornerRadius(12)
-                    .padding()
                     
-                    Text("\(viewModel.montant, specifier: "%.2f")")
+                    Text(viewModel.targetCurrencyFormatter.string(from: NSNumber(value: viewModel.montant)) ?? "0.00")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.blue.opacity(0.7))
                         .cornerRadius(12)
-                        .padding(.horizontal, 20)
                         .animation(.easeInOut, value: viewModel.montant)
                 }
-                
-                Spacer()
             }
+            .padding(.horizontal, 20)
+
             .toolbar {
                 if amountIsFocused {
                     ToolbarItem(placement: .keyboard) {
