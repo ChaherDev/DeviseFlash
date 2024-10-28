@@ -13,6 +13,7 @@ struct HomeView: View {
     
     @State private var viewModel = HomeViewViewModel()
     @FocusState private var amountIsFocused: Bool
+    let color = Color(red: 1.0, green: 0.8, blue: 0.0)
     
     var body: some View {
         ZStack {
@@ -25,23 +26,21 @@ struct HomeView: View {
             
             
             VStack(spacing: 20) {
+                Spacer()
                 Text("DeviseFlash\n⚡️\nVoyage au Cœur\ndes Devises !")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
-                        .foregroundStyle(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.orange, Color.pink]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                        )
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 40)
-                        .padding(.bottom, 20)
-                        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
+                    .font(.system(size: 38, weight: .bold, design: .rounded))
+                    .foregroundStyle(color)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 40)
+                    .padding(.bottom, 20)
+                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
+                
+                Spacer()
                 VStack(spacing: 10) {
                     Text("Choisissez votre devise source")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .foregroundColor(color)
                     
                     Picker("Devise Source", selection: $viewModel.selectedCurrencySource) {
                         ForEach(viewModel.currencySource, id: \.self) { devise in
@@ -51,21 +50,24 @@ struct HomeView: View {
                     .pickerStyle(.menu)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.white.opacity(0.2))
+                    .background(color)
                     .cornerRadius(12)
                     
                     TextField("Entrez un montant", value: $viewModel.value, formatter: viewModel.currencyFormatter)
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                         .padding()
-                        .background(Color.white.opacity(0.8))
+                        .background(Color.white)
                         .cornerRadius(12)
+                        .multilineTextAlignment(.center)
                 }
-                
+                Spacer()
                 VStack(spacing: 10) {
                     Text("Choisissez votre devise cible")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(color)
+                        .fontWeight(.bold)
+
                     
                     Picker("Devise Cible", selection: $viewModel.selectedCurrencyTarget) {
                         ForEach(viewModel.currencyTarget, id: \.self) { devise in
@@ -75,9 +77,9 @@ struct HomeView: View {
                     .pickerStyle(.menu)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.white.opacity(0.2))
+                    .background(color)
                     .cornerRadius(12)
-                    
+         
                     Text(viewModel.targetCurrencyFormatter.string(from: NSNumber(value: viewModel.montant)) ?? "0.00")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.white)
@@ -87,6 +89,8 @@ struct HomeView: View {
                         .cornerRadius(12)
                         .animation(.easeInOut, value: viewModel.montant)
                 }
+                Spacer()
+                Spacer()
             }
             .padding(.horizontal, 20)
 
