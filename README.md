@@ -23,14 +23,6 @@ L'application sera prochainement disponible sur l'App Store.
     <img src="Screens/Capture%204.png" alt="Capture 4" width="200"/>
 </div>
 
-## Configuration
-
-1. Clonez le projet depuis GitHub.
-2. Assurez-vous d’avoir Xcode installé avec la dernière version de Swift.
-3. **Configuration de l'API** : 
-    - Créez un compte sur [Currencylayer](https://currencylayer.com/) pour obtenir une clé API gratuite.
-    - Ajoutez votre clé API au fichier de configuration de l'application pour permettre les requêtes en temps réel.
-
 ## Comment utiliser
 
 1. Lancez l'application.
