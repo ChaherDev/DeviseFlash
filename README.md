@@ -1,4 +1,4 @@
-# DeviseFlash ⚡️🌍
+# DeviseFlash 🌍
 
 **DeviseFlash** est une application de conversion de devises en temps réel conçue pour les utilisateurs d'iOS. Cette application permet de convertir rapidement des montants entre plusieurs devises en se basant sur les taux de change actuels fournis par l'API **Currencylayer**.
 
@@ -16,7 +16,7 @@ L'application sera prochainement disponible sur l'App Store.
 ## Aperçu de l'application
 
 ### Vidéo d'aperçu
-> *(Pour lire la vidéo d’aperçu, vous pouvez la visionner ici : [Aperçu de l'application](https://url_de_la_video_sur_une_plateforme_externe) ou convertir la vidéo en `.gif` et l'ajouter ici)*
+![Aperçu de l'application](Screens/Aperçu%201.mp4)
 
 ### Captures d'écran
 > Voici quelques captures d’écran de l'application en action :
