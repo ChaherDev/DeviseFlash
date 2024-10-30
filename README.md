@@ -1,11 +1,10 @@
-# DeviseFlash 🌍
+# DeviseFlash ⚡️🌍
 
 **DeviseFlash** est une application de conversion de devises en temps réel conçue pour les utilisateurs d'iOS. Cette application permet de convertir rapidement des montants entre plusieurs devises en se basant sur les taux de change actuels fournis par l'API **Currencylayer**.
 
 ## En cours de validation pour l'App Store
 
-L'application sera prochainement disponible sur l'AppStore
-
+L'application sera prochainement disponible sur l'App Store.
 
 ## Fonctionnalités
 
@@ -14,19 +13,21 @@ L'application sera prochainement disponible sur l'AppStore
 - **Interface intuitive** : Une interface simple et conviviale pour une expérience utilisateur fluide.
 - **Mise à jour en temps réel** : Utilise l'API Currencylayer pour obtenir les derniers taux de change.
 
-## Captures d'écran
-
-> Voici un aperçu de l'application en action :
+## Aperçu de l'application
 
 ### Vidéo d'aperçu
-![Aperçu de l'application](Screens/Aperçu%201.mp4)
+> *(Pour lire la vidéo d’aperçu, vous pouvez la visionner ici : [Aperçu de l'application](https://url_de_la_video_sur_une_plateforme_externe) ou convertir la vidéo en `.gif` et l'ajouter ici)*
 
 ### Captures d'écran
-![Capture 1](Screens/Capture%201.png)
-![Capture 2](Screens/Capture%202.png)
-![Capture 3](Screens/Capture%203.png)
-![Capture 4](Screens/Capture%204.png)
-![Capture 5](Screens/Capture%205.png)
+> Voici quelques captures d’écran de l'application en action :
+
+<div align="center">
+    <img src="Screens/Capture%201.png" alt="Capture 1" width="200"/>
+    <img src="Screens/Capture%202.png" alt="Capture 2" width="200"/>
+    <img src="Screens/Capture%203.png" alt="Capture 3" width="200"/>
+    <img src="Screens/Capture%204.png" alt="Capture 4" width="200"/>
+    <img src="Screens/Capture%205.png" alt="Capture 5" width="200"/>
+</div>
 
 ## Configuration
 
