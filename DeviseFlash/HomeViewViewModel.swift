@@ -24,7 +24,6 @@ struct CurrencyConversionResponse: Codable {
 
 @Observable
 class HomeViewViewModel {
-    // Ajout des autres devises
     let currencySource = ["USD", "EUR", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD", "CNY", "SEK", "NOK", "MXN", "SGD"]
     let currencyTarget = ["USD", "EUR", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD", "CNY", "SEK", "NOK", "MXN", "SGD"]
     

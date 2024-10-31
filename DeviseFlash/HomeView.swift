@@ -9,7 +9,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                RadialGradient(gradient: Gradient(colors: [Color(red: 0.1, green: 0.6, blue: 0.6), Color(red: 0.1, green: 0.9, blue: 0.9)]), center: .center, startRadius: 0, endRadius: 700)
+                RadialGradient(gradient: Gradient(colors: [Color(red: 0.1, green: 0.7, blue: 0.7), Color(red: 0.1, green: 0.6, blue: 0.6)]), center: .center, startRadius: 0, endRadius: 700)
                 
                     .ignoresSafeArea()
                 
@@ -101,6 +101,7 @@ struct HomeView: View {
                     }
                 }
             }
+            .foregroundStyle(color)
         }
     }
 }
