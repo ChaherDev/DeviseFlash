@@ -9,7 +9,8 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.blue.opacity(0.8)
+                RadialGradient(gradient: Gradient(colors: [Color(red: 0.1, green: 0.6, blue: 0.6), Color(red: 0.1, green: 0.9, blue: 0.9)]), center: .center, startRadius: 0, endRadius: 700)
+                
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -79,7 +80,7 @@ struct HomeView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue.opacity(0.7))
+                                .background(Color(red: 0, green: 0.75, blue: 0.75))
                                 .cornerRadius(12)
                                 .animation(.easeInOut, value: viewModel.montant)
                         }
@@ -97,11 +98,9 @@ struct HomeView: View {
                                 await viewModel.fetchData()
                             }
                         }
-                        .foregroundColor(color)
                     }
                 }
             }
-            .foregroundColor(color) // Appliquer la couleur du titre
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "DeviseFlash.jpg",
+      "filename" : "DeviseFlash.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "DeviseFlash 1.jpg",
+      "filename" : "DeviseFlash 1.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,6 +25,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "DeviseFlash 2.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
