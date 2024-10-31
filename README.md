@@ -17,10 +17,10 @@ L'application sera prochainement disponible sur l'App Store.
 > Voici quelques captures d’écran de l'application en action :
 
 <div align="center">
-    <img src="Screens/Capture%201.png" alt="Capture 1" width="200"/>
-    <img src="Screens/Capture%202.png" alt="Capture 2" width="200"/>
-    <img src="Screens/Capture%203.png" alt="Capture 3" width="200"/>
-    <img src="Screens/Capture%204.png" alt="Capture 4" width="200"/>
+    <img src="Screens/iPhone/Capture%201.png" alt="Capture 1" width="200"/>
+    <img src="Screens/iPhone/Capture%202.png" alt="Capture 2" width="200"/>
+    <img src="Screens/iPhone/Capture%203.png" alt="Capture 3" width="200"/>
+    <img src="Screens/iPhone/Capture%204.png" alt="Capture 4" width="200"/>
 </div>
 
 ## Comment utiliser
