@@ -74,7 +74,7 @@ struct HomeView: View {
                             .padding()
                             .background(color)
                             .cornerRadius(12)
-                     
+                            
                             Text(viewModel.targetCurrencyFormatter.string(from: NSNumber(value: viewModel.montant)) ?? "0.00")
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundColor(.white)
