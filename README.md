@@ -9,16 +9,6 @@
 - **Interface intuitive** : Une interface simple et conviviale pour une expérience utilisateur fluide.
 - **Mise à jour en temps réel** : Utilise l'API Currencylayer pour obtenir les derniers taux de change.
 
-## Captures d'écran
-> Voici quelques captures d’écran de l'application en action :
-
-<div align="center">
-    <img src="Screens/iPhone/Capture%201.png" alt="Capture 1" width="200"/>
-    <img src="Screens/iPhone/Capture%202.png" alt="Capture 2" width="200"/>
-    <img src="Screens/iPhone/Capture%203.png" alt="Capture 3" width="200"/>
-    <img src="Screens/iPhone/Capture%204.png" alt="Capture 4" width="200"/>
-</div>
-
 ## Comment utiliser
 
 1. Lancez l'application.
